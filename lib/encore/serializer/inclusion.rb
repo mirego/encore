@@ -4,17 +4,18 @@ module Encore
       extend ActiveSupport::Concern
 
       def parsed_includes(includes)
-        output = Set.new
+        output = []
 
-        if includes.present?
-          output += includes.split(',').map(&:to_sym)
-        end
+        # Split includes list
+        output += includes.split(',').map(&:to_sym) if includes.present?
 
-        if serializer.respond_to?(:always_include)
-          output += serializer.always_include
-        end
+        # Remove resource type not included in 'can_include'
+        output = serializer.can_include & output if serializer.respond_to?(:can_include)
 
-        output.to_a
+        # Add 'always_include' resource type
+        output += serializer.always_include if serializer.respond_to?(:always_include)
+
+        output
       end
     end
   end
