@@ -3,8 +3,10 @@ module Encore
     module Paging
       extend ActiveSupport::Concern
 
-      def paginated_collection(collection, page, per_page)
-        collection.page(page).per(per_page)
+      def paginated_collection(collection, options)
+        return collection if options[:skip_paging]
+
+        collection.page(options[:page]).per(options[:per_page])
       end
 
       def pagination_for(collection)
@@ -17,7 +19,15 @@ module Encore
         }
       end
 
+      def parse_page(page)
+        return 1 if page.nil?
+
+        page.to_i
+      end
+
       def parse_per_page(per_page)
+        return Kaminari.config.default_per_page if per_page.nil?
+
         max_per_page = Kaminari.config.max_per_page.to_i
         per_page = per_page.to_i
 
