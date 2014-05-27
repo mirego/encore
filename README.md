@@ -126,9 +126,9 @@ This will result in the following JSON output:
     }
   ],
   "links": {
-    comments.author: {
-      href: "/authors?ids={author.id}",
-      type: "user"
+    "comments.author": {
+      "href": "/authors?ids={author.id}",
+      "type": "user"
     }
   },
   "linked": {
