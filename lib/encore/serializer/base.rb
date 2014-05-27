@@ -39,6 +39,10 @@ module Encore
         model_class.name.pluralize.underscore.to_sym
       end
 
+      def self.key_mappings
+        {}
+      end
+
     private
 
       def add_reflection?(reflection)

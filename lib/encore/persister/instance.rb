@@ -1,6 +1,6 @@
 require 'encore/persister/current_user_injection'
 require 'encore/persister/errors_parser'
-require 'encore/persister/key_mapping_for_update'
+require 'encore/persister/key_mapping'
 require 'encore/persister/links_parser'
 
 module Encore
@@ -37,7 +37,9 @@ module Encore
     private
 
       def procces_payload!(action)
-        @payload.each_with_index do |args, i|
+        payload = @model.active_model_serializer ? KeyMapping.map_keys(@payload, @model.active_model_serializer) : @payload
+
+        payload.each_with_index do |args, i|
           args = parse_links(args)
           record = send("#{action}_record", args)
 
