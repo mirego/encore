@@ -21,7 +21,6 @@ RSpec.configure do |config|
   config.include ModelMacros
 
   config.before :each do
-    adapter = ENV['DB_ADAPTER'] || 'sqlite3'
-    setup_database(adapter: adapter, database: 'encore_test')
+    setup_database(adapter: 'sqlite3', database: 'encore_test')
   end
 end

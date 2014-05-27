@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'activemodel', '>= 3.0.0'
-  spec.add_dependency 'activerecord', '>= 3.0.0'
+  spec.add_dependency 'activemodel', '>= 4.0.0'
+  spec.add_dependency 'activerecord', '>= 4.0.0'
   spec.add_dependency 'active_model_serializers', '~> 0.8.0'
   spec.add_dependency 'kaminari', '~> 0.15.1'
 
