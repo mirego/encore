@@ -4,7 +4,7 @@ module Encore
       extend ActiveSupport::Concern
 
       def add_links_info
-        [serializer, *@serializers].reduce({}) do |memo, serializer|
+        [serializer, *@serializers].each_with_object({}) do |serializer, memo|
           root = serializer.root_key
           model = serializer.model_class
 
@@ -14,8 +14,6 @@ module Encore
             type = reflection.klass.name.underscore.pluralize
             memo.merge! key(root, reflection) => { href: href(root, reflection), type: type }
           end
-
-          memo
         end
       end
 

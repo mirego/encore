@@ -11,13 +11,11 @@ module Encore
       include BelongsTo
 
       def add_linked_sets(collection, option_include)
-        collection.reduce(Hash.new(Set.new)) do |memo, resource|
+        collection.each_with_object(Hash.new(Set.new)) do |resource, memo|
           option_include.each do |inclusion|
             model, ids = association_collection(resource, inclusion)
             memo[model] += ids
           end
-
-          memo
         end
       end
 
