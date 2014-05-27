@@ -39,10 +39,11 @@ Encore is under heavy development at the moment, do not use this gem in producti
 class CommentSerializer < Encore::Serializer::Base
   attributes :id, :body, :links
 
-  # This is the default behavior, if that's what
-  # you want, those lines aren't required.
+  # By default, root_key will be the pluralized model
+  # name. If you want to set a custom root_key, you can
+  # do that:
   def self.root_key
-    :comments
+    :user_comments
   end
 end
 ```
