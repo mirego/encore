@@ -19,13 +19,11 @@ module Encore
         }
       end
 
-      def parse_page(page)
-        return 1 if page.nil?
-
-        page.to_i
+      def parsed_page(page)
+        page.present? ? page.to_i : 1
       end
 
-      def parse_per_page(per_page)
+      def parsed_per_page(per_page)
         return Kaminari.config.default_per_page if per_page.nil?
 
         max_per_page = Kaminari.config.max_per_page.to_i

@@ -63,8 +63,8 @@ module Encore
       def parsed_options(opts)
         {
           skip_paging: opts[:skip_paging].present?,
-          page: parse_page(opts[:page]),
-          per_page: parse_per_page(opts[:per_page])
+          page: parsed_page(opts[:page]),
+          per_page: parsed_per_page(opts[:per_page])
         }
       end
     end
