@@ -19,7 +19,7 @@ module Encore
       end
 
       def persist!
-        !!@model.transaction do
+        @model.transaction do
           procces_payload!(action)
 
           if @errors.any? || @ids.empty?

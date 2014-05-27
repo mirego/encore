@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mirego/encore'
   spec.license       = 'BSD 3-Clause'
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activemodel', '>= 3.0.0'

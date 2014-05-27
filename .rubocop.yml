@@ -1,15 +1,6 @@
 AllCops:
   Include:
-    - Rakefile
-    - config.ru
-    - Gemfile
-  Exclude:
-    - bin/**
-    - db/schema.rb
-    - db/migrate/**
-    - script/**
-    - vendor/*/**
-  RunRailsCops: true
+    - encore.gemspec
 
 Documentation:
   Enabled: false
@@ -52,17 +43,8 @@ Lambda:
 RegexpLiteral:
   Enabled: false
 
-RedundantBegin:
-  Enabled: false
-
 AssignmentInCondition:
   Enabled: false
 
-ParameterLists:
-  Enabled: false
-
 ClassAndModuleChildren:
-  Enabled: false
-
-DoubleNegation:
   Enabled: false
