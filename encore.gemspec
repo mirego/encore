@@ -17,5 +17,13 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files`.split($/)
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'activemodel', '>= 3.0.0'
+  spec.add_dependency 'activerecord', '>= 3.0.0'
+  spec.add_dependency 'active_model_serializers', '~> 0.8.0'
+  spec.add_dependency 'kaminari', '~> 0.15.1'
+
   spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'rake', '~> 10.3'
+  spec.add_development_dependency 'rspec', '3.0.0beta2'
+  spec.add_development_dependency 'sqlite3', '>= 1.3.8', '< 1.4'
 end

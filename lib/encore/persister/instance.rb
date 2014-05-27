@@ -5,7 +5,7 @@ require 'encore/persister/links_parser'
 
 module Encore
   module Persister
-    class Base
+    class Instance
       include LinksParser
       include ErrorsParser
 
