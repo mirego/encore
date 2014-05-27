@@ -3,7 +3,6 @@ require 'encore/serializer/eager_loading'
 require 'encore/serializer/linked_loading'
 require 'encore/serializer/linked_serialized'
 require 'encore/serializer/links_info'
-require 'encore/serializer/main_paging'
 require 'encore/serializer/main_serialized'
 require 'encore/serializer/paging'
 
@@ -14,7 +13,6 @@ module Encore
       include EagerLoading
       include MainSerialized
       include Paging
-      include MainPaging
       include LinkedLoading
       include LinkedSerialized
       include LinksInfo
