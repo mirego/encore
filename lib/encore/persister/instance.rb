@@ -41,10 +41,10 @@ module Encore
           args = parse_links(args)
           record = send("#{action}_record", args)
 
-          if record.present?
-            @ids += fetch_id(record)
-            @errors += parse_errors(record, i)
-          end
+          next unless record.present?
+
+          @ids += fetch_id(record)
+          @errors += parse_errors(record, i)
         end
       end
 

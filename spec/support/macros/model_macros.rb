@@ -1,19 +1,19 @@
 module ModelMacros
   # Create a new ActiveRecord model
-  def spawn_model(klass_name, options = {}, &block)
+  def spawn_model(klass_name, &block)
     spawn_object klass_name, ActiveRecord::Base do
       instance_exec(&block) if block
     end
   end
 
   # Create a new Encore::Serializer object
-  def spawn_serializer(klass_name, options = {}, &block)
+  def spawn_serializer(klass_name, &block)
     spawn_object klass_name, Encore::Serializer::Base do
       instance_exec(&block) if block
     end
   end
 
-  protected
+protected
 
   # Create a new model class
   def spawn_object(klass_name, parent_klass, &block)

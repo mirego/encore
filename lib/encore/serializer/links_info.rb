@@ -9,11 +9,10 @@ module Encore
           model = serializer.model_class
 
           serializer.can_access.each do |include|
-            if reflection = model.reflections[include]
-              type = reflection.klass.name.underscore.pluralize
+            next unless reflection = model.reflections[include]
 
-              memo.merge! key(root, reflection) => { href: href(root, reflection), type: type }
-            end
+            type = reflection.klass.name.underscore.pluralize
+            memo.merge! key(root, reflection) => { href: href(root, reflection), type: type }
           end
 
           memo
