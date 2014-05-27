@@ -100,6 +100,18 @@ Encore can handle model associations. For example, let's include the `author` in
 Encore::Serializer::Instance.new(@comments, include: 'author')
 ```
 
+Since we don't want all associations to be exposed, we also need to allow the serializer to include the association. To do so, we need to update the `CommentSerializer`.
+
+```ruby
+class CommentSerializer < Encore::Serializer::Base
+  # ...
+
+  def self.can_include
+    [:author]
+  end
+end
+```
+
 This will result in the following JSON output:
 
 ```json
@@ -145,7 +157,6 @@ class CommentSerializer < Encore::Serializer::Base
 end
 ```
 
-* `can_include`
 * `can_access`
 
 ### Pagination
