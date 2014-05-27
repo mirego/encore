@@ -10,9 +10,9 @@ module Encore
       include HasOne
       include BelongsTo
 
-      def add_linked_sets(collection, includes)
+      def add_linked_sets(collection, option_include)
         collection.reduce(Hash.new(Set.new)) do |memo, resource|
-          includes.each do |inclusion|
+          option_include.each do |inclusion|
             model, ids = association_collection(resource, inclusion)
             memo[model] += ids
           end

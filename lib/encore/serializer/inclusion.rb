@@ -3,11 +3,11 @@ module Encore
     module Inclusion
       extend ActiveSupport::Concern
 
-      def parsed_includes(includes)
+      def parsed_include(option_include)
         output = []
 
         # Split includes list
-        output += includes.split(',').map(&:to_sym) if includes.present?
+        output += option_include.split(',').map(&:to_sym) if option_include.present?
 
         # Remove resource type not included in 'can_include'
         output = serializer.can_include & output if serializer.respond_to?(:can_include)

@@ -19,7 +19,6 @@ module Encore
 
       def initialize(collection, opts = {})
         @collection = collection
-        @includes = parsed_includes(opts[:include])
         @serializers = [serializer]
         @options = parsed_options(opts)
       end
@@ -27,10 +26,10 @@ module Encore
       def as_json(*_)
         # Prepare main collection
         @collection = paginated_collection(@collection, @options)
-        @collection = add_eager_loading(@collection, @includes)
+        @collection = add_eager_loading(@collection, @options[:include])
 
         # Fetch linked ids
-        linked_ids = add_linked_sets(@collection, @includes)
+        linked_ids = add_linked_sets(@collection, @options[:include])
 
         # Build final output
         output = add_main_serialized(@collection)
@@ -60,6 +59,7 @@ module Encore
 
       def parsed_options(opts)
         {
+          include: parsed_include(opts[:include]),
           skip_paging: opts[:skip_paging].present?,
           page: parsed_page(opts[:page]),
           per_page: parsed_per_page(opts[:per_page])
