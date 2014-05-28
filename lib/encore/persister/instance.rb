@@ -1,4 +1,4 @@
-require 'encore/persister/current_user_injection'
+require 'encore/persister/param_injection'
 require 'encore/persister/errors_parser'
 require 'encore/persister/key_mapping'
 require 'encore/persister/links_parser'
@@ -11,9 +11,10 @@ module Encore
 
       attr_reader :errors
 
-      def initialize(model, payload)
+      def initialize(model, payload, options = {})
         @model = model
         @payload = payload
+        @options = options
         @errors = []
         @ids = Set.new
       end
@@ -37,7 +38,8 @@ module Encore
     private
 
       def procces_payload!(action)
-        payload = @model.active_model_serializer ? KeyMapping.map_keys(@payload, @model.active_model_serializer) : @payload
+        payload = key_mapping(@payload)
+        payload = param_injection(payload)
 
         payload.each_with_index do |args, i|
           args = parse_links(args)
@@ -69,6 +71,14 @@ module Encore
 
       def fetch_id(record)
         [record.id]
+      end
+
+      def key_mapping(payload)
+        @model.active_model_serializer ? KeyMapping.map_keys(payload, @model.active_model_serializer) : payload
+      end
+
+      def param_injection(payload)
+        ParamInjection.inject(payload, @options[:inject_params])
       end
     end
   end

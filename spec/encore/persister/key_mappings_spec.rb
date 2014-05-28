@@ -16,14 +16,14 @@ describe Encore::Persister do
   let(:spawn_objects!) do
     spawn_model('User')
     spawn_serializer('UserSerializer') do
-      attributes :CamelCaseName
+      attributes :snake_case_key
 
-      def CamelCaseName
+      def snake_case_key
         :name
       end
 
       def key_mappings
-        { CamelCaseName: :name }
+        { snake_case_key: :name }
       end
     end
   end
@@ -38,7 +38,7 @@ describe Encore::Persister do
   context 'single create' do
     let(:params) do
       [{
-        CamelCaseName: 'Allan',
+        snake_case_key: 'Allan',
         phone: '555-2525'
       }]
     end
@@ -51,10 +51,10 @@ describe Encore::Persister do
   context 'many create' do
     let(:params) do
       [{
-        CamelCaseName: 'Allan',
+        snake_case_key: 'Allan',
         phone: '555-2525'
       }, {
-        CamelCaseName: 'Bob'
+        snake_case_key: 'Bob'
       }]
     end
 
