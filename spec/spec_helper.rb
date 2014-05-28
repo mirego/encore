@@ -14,6 +14,12 @@ RSpec.configure do |config|
   config.include ModelMacros
 
   config.before :each do
+    # Setup the database
     setup_database(adapter: 'sqlite3', database: 'encore_test')
+  end
+
+  config.before :suite do
+    # Enforce available locales (otherwise generating error messages throws a warning)
+    I18n.enforce_available_locales = true
   end
 end
