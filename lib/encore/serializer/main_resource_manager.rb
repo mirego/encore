@@ -1,9 +1,9 @@
 module Encore
   module Serializer
-    module MainSerialized
+    module MainResourceManager
       extend ActiveSupport::Concern
 
-      def add_main_serialized(collection)
+      def self.add(collection, serializer)
         {
           serializer.root_key => collection.map { |o| serializer.new(o).as_json }
         }

@@ -1,9 +1,9 @@
 module Encore
   module Serializer
-    module EagerLoading
+    module EagerLoadingManager
       extend ActiveSupport::Concern
 
-      def add_eager_loading(collection, option_include)
+      def self.add(collection, option_include)
         collection.includes(option_include)
       end
     end

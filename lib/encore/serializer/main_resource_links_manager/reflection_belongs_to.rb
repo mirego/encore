@@ -1,10 +1,10 @@
 module Encore
   module Serializer
-    module LinkedLoading
-      module BelongsTo
+    module MainResourceLinksManager
+      module ReflectionBelongsTo
         extend ActiveSupport::Concern
 
-        def belongs_to(item, reflection)
+        def self.add(item, reflection)
           [item.send(reflection.foreign_key).try(:to_s)]
         end
       end
