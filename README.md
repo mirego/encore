@@ -162,22 +162,6 @@ class CommentSerializer < Encore::Serializer::Base
 end
 ```
 
-### Restrict links
-
-Sometimes, you might want to not publicly expose an API endpoint but still want to allow the inclusion. In that case, update the `CommentSerializer`:
-
-```ruby
-class CommentSerializer < Encore::Serializer::Base
-  attributes :id, :body, :links
-
-  def self.can_access
-    []
-  end
-end
-```
-
-This way, the *Author*'s link won't be returned. By default, `can_access` will have the same value as `can_include`.
-
 ### Pagination
 
 Lot more work to do here :)

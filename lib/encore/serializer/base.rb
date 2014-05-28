@@ -31,10 +31,6 @@ module Encore
         []
       end
 
-      def self.can_access
-        can_include
-      end
-
       def self.root_key
         model_class.name.pluralize.underscore.to_sym
       end
