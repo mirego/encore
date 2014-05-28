@@ -3,13 +3,6 @@ $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'rspec'
 require 'sqlite3'
 
-require 'kaminari'
-require 'active_record'
-require 'active_model'
-require 'active_model_serializers'
-
-Kaminari::Hooks.init
-
 require 'encore'
 
 # Require our macros and extensions
