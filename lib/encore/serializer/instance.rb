@@ -2,7 +2,6 @@ require 'encore/serializer/eager_loading_manager'
 require 'encore/serializer/linked_resource_manager'
 require 'encore/serializer/main_resource_manager'
 require 'encore/serializer/main_resource_links_manager'
-require 'encore/serializer/links_manager'
 require 'encore/serializer/meta_manager'
 require 'encore/serializer/utils'
 require 'encore/serializer/options_parser'
@@ -26,7 +25,6 @@ module Encore
 
         # Build final output
         output = MainResourceManager.add(@collection, serializer)
-        output.merge! links: LinksManager.add(serializer, @serializers)
         output.merge! linked: LinkedResourceManager.add(linked_ids)
         output.merge! meta: MetaManager.add(@collection, serializer, @options)
 
