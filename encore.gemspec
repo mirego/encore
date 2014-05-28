@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = Encore::VERSION
   spec.authors       = ['Simon Prévost']
   spec.email         = ['sprevost@mirego.com']
-  spec.description   = ''
-  spec.summary       = ''
+  spec.description   = 'Encore provides serializers and persisters to build JSON API-compliant Web services with Ruby on Rails.'
+  spec.summary       = spec.description
   spec.homepage      = 'https://github.com/mirego/encore'
   spec.license       = 'BSD 3-Clause'
 
