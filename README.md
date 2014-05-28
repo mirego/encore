@@ -3,7 +3,7 @@
     <img src="http://i.imgur.com/erXBozp.png" alt="Encore" />
   </a>
   <br />
-  Encore will make your API compatible with the <a href="http://jsonapi.org">JSON API</a> standard.
+  Encore provides serializers and persisters to build <a href="http://jsonapi.org">JSON API</a>-compliant Web services with Ruby on Rails.
   <br /><br />
 </p>
 
