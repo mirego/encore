@@ -27,7 +27,7 @@ module Encore
         # Build final output
         output = MainResourceManager.add(@collection, serializer)
         output.merge! links: LinksManager.add(serializer, @serializers)
-        output.merge! linked: LinkedResourceManager.add(linked_ids, @serializers)
+        output.merge! linked: LinkedResourceManager.add(linked_ids)
         output.merge! meta: MetaManager.add(@collection, serializer, @options)
 
         output
