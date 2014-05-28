@@ -1,22 +1,15 @@
-require 'encore/serializer/inclusion'
-require 'encore/serializer/eager_loading'
-require 'encore/serializer/linked_loading'
-require 'encore/serializer/linked_serialized'
-require 'encore/serializer/links_info'
-require 'encore/serializer/main_serialized'
-require 'encore/serializer/paging'
+require 'encore/serializer/eager_loading_manager'
+require 'encore/serializer/linked_resource_manager'
+require 'encore/serializer/main_resource_manager'
+require 'encore/serializer/main_resource_links_manager'
+require 'encore/serializer/links_manager'
+require 'encore/serializer/meta_manager'
+require 'encore/serializer/utils'
+require 'encore/serializer/options_parser'
 
 module Encore
   module Serializer
     class Instance
-      include Inclusion
-      include EagerLoading
-      include MainSerialized
-      include Paging
-      include LinkedLoading
-      include LinkedSerialized
-      include LinksInfo
-
       def initialize(collection, opts = {})
         @collection = collection
         @serializers = [serializer]
@@ -25,17 +18,17 @@ module Encore
 
       def as_json(*_)
         # Prepare main collection
-        @collection = paginated_collection(@collection, @options)
-        @collection = add_eager_loading(@collection, @options[:include])
+        @collection = MetaManager.paginate_collection(@collection, @options)
+        @collection = EagerLoadingManager.add(@collection, @options[:include])
 
         # Fetch linked ids
-        linked_ids = add_linked_sets(@collection, @options[:include])
+        linked_ids = MainResourceLinksManager.add(@collection, reflections, @options[:include])
 
         # Build final output
-        output = add_main_serialized(@collection)
-        output.merge! links: add_links_info
-        output.merge! linked: add_linked_serialized(linked_ids)
-        output.merge! meta: add_main_pagination(@collection, @options)
+        output = MainResourceManager.add(@collection, serializer)
+        output.merge! links: LinksManager.add(serializer, @serializers)
+        output.merge! linked: LinkedResourceManager.add(linked_ids, @serializers)
+        output.merge! meta: MetaManager.add(@collection, serializer, @options)
 
         output
       end
@@ -47,22 +40,17 @@ module Encore
       end
 
       def serializer
-        @serializer ||= fetch_serializer(@collection.klass)
-      end
-
-      def fetch_serializer(model)
-        default_serializer = (model.name.gsub('::', '') + 'Serializer')
-        model.active_model_serializer || default_serializer.constantize
-      rescue NameError
-        raise NameError, "can’t find serializer for #{model.name}, try creating #{default_serializer}"
+        @serializer ||= Utils.fetch_serializer(@collection.klass)
       end
 
       def parsed_options(opts)
+        parser = OptionsParser.new(opts)
+
         {
-          include: parsed_include(opts[:include]),
-          skip_paging: opts[:skip_paging].present?,
-          page: parsed_page(opts[:page]),
-          per_page: parsed_per_page(opts[:per_page])
+          include: parser.include(serializer),
+          skip_paging: parser.skip_paging,
+          page: parser.page,
+          per_page: parser.per_page
         }
       end
     end

@@ -1,10 +1,10 @@
 module Encore
   module Serializer
-    module LinkedLoading
-      module HasOne
+    module MainResourceLinksManager
+      module ReflectionHasOne
         extend ActiveSupport::Concern
 
-        def one(item, reflection)
+        def self.add(item, reflection)
           [item.send(reflection.name).try(:id).try(:to_s)]
         end
       end

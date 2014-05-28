@@ -1,14 +1,14 @@
 module Encore
   module Serializer
-    module LinksInfo
+    module LinksManager
       extend ActiveSupport::Concern
 
-      def add_links_info
-        [serializer, *@serializers].each_with_object({}) do |serializer, memo|
-          root = serializer.root_key
-          model = serializer.model_class
+      def self.add(serializer, serializers)
+        [serializer, *serializers].each_with_object({}) do |item, memo|
+          root = item.root_key
+          model = item.model_class
 
-          serializer.can_access.each do |include|
+          item.can_access.each do |include|
             next unless reflection = model.reflections[include]
 
             type = reflection.klass.name.underscore.pluralize
@@ -19,11 +19,11 @@ module Encore
 
     private
 
-      def key(root, reflection)
+      def self.key(root, reflection)
         "#{root.to_s.pluralize}.#{reflection.name}"
       end
 
-      def href(root, reflection)
+      def self.href(root, reflection)
         if reflection.belongs_to?
           belongs_to_href(root, reflection)
         else
@@ -31,11 +31,11 @@ module Encore
         end
       end
 
-      def belongs_to_href(root, reflection)
+      def self.belongs_to_href(root, reflection)
         "/#{reflection.plural_name}/{#{root}.links.#{reflection.name}}"
       end
 
-      def many_href(root, reflection)
+      def self.many_href(root, reflection)
         "/#{reflection.plural_name}?#{root}_id={#{root}.id}"
       end
     end
