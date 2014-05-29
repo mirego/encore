@@ -5,6 +5,8 @@
   <br />
   Encore provides serializers and persisters to build <a href="http://jsonapi.org">JSON API</a>-compliant Web services with Ruby on Rails.
   <br /><br />
+  <a href="https://rubygems.org/gems/encore"><img src="http://img.shields.io/gem/v/encore.svg" /></a>
+  <a href="https://travis-ci.org/mirego/encore"><img src="http://img.shields.io/travis/mirego/encore.svg" /></a>
 </p>
 
 ## Installation
