@@ -11,7 +11,7 @@ module Encore
           serializer = Utils.fetch_serializer(klass)
 
           collection = klass.where(id: ids.to_a)
-          memo.merge! serializer.root_key => collection.map { |c| serializer.new(c).as_json }
+          memo.merge! MainResourceManager.add(collection, serializer)
         end
       end
     end
