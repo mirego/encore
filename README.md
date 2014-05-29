@@ -11,7 +11,7 @@
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application’s Gemfile:
 
 ```ruby
 gem 'encore'
@@ -31,7 +31,7 @@ $ gem install encore
 
 ## Disclaimer
 
-Encore is under heavy development at the moment, do not use this gem in production unless you know exactly what you're doing. **Breaking changes** are still being committed.
+As Encore is under heavy development at the moment, we advise against using this gem in production unless you know exactly what you’re doing. *Breaking changes* are still being committed.
 
 ## Basic serializer usage
 
@@ -96,13 +96,13 @@ Will result in the following JSON output:
 
 ### Inclusion
 
-Encore can handle model associations. For example, let's include the `author` in the code sample above.
+Encore can handle model associations. For example, let’s include the `author` in the code sample above.
 
 ```ruby
 Encore::Serializer::Instance.new(@comments, include: 'author')
 ```
 
-Since we don't want all associations to be exposed, we also need to allow the serializer to include the association. To do so, we need to update the `CommentSerializer`.
+Since we don’t want all associations to be exposed, we also need to allow the serializer to include the association. To do so, we need to update the `CommentSerializer`.
 
 ```ruby
 class CommentSerializer < Encore::Serializer::Base
@@ -172,6 +172,6 @@ The hazelnut logo is based on [this lovely icon](http://thenounproject.com/term/
 
 ## About Mirego
 
-[Mirego](http://mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We're a team of [talented people](http://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://mirego.org).
+[Mirego](http://mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We’re a team of [talented people](http://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://mirego.org).
 
 We also [love open-source software](http://open.mirego.com) and we try to give back to the community as much as we can.
