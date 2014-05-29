@@ -162,10 +162,6 @@ class CommentSerializer < Encore::Serializer::Base
 end
 ```
 
-### Pagination
-
-Lot more work to do here :)
-
 ## License
 
 `Encore` is © 2013-2014 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/encore/blob/master/LICENSE.md) file.
