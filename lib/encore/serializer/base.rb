@@ -4,7 +4,7 @@ module Encore
   module Serializer
     class Base < ::ActiveModel::Serializer
       def id
-        super.id.to_s
+        object.id.to_s
       end
 
       def links
