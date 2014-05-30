@@ -7,6 +7,7 @@
   <br /><br />
   <a href="https://rubygems.org/gems/encore"><img src="http://img.shields.io/gem/v/encore.svg" /></a>
   <a href="https://travis-ci.org/mirego/encore"><img src="http://img.shields.io/travis/mirego/encore.svg" /></a>
+  <a href="https://codeclimate.com/github/mirego/encore"><img src="http://img.shields.io/codeclimate/github/mirego/encore.svg" /></a>
 </p>
 
 ## Installation
