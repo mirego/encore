@@ -161,7 +161,7 @@ Requesting `GET /posts?include=comments` will result in the following JSON outpu
   }
 ```
 
-If you want the `comments` the **always** be included when you request a `post`, update the `PostSerializer` this way:
+If you want the `comments` to **always** be included when you request a `post`, update the `PostSerializer` this way:
 
 ```ruby
 class PostSerializer < Encore::Serializer::Base
