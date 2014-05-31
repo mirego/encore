@@ -82,7 +82,6 @@ Will result in the following JSON output:
       "links": {}
     }
   ],
-  "links": {},
   "linked": {},
   "meta": {
     "comments": {
@@ -128,12 +127,6 @@ This will result in the following JSON output:
       }
     }
   ],
-  "links": {
-    "comments.author": {
-      "href": "/authors?ids={author.id}",
-      "type": "user"
-    }
-  },
   "linked": {
     "authors": [
       {
