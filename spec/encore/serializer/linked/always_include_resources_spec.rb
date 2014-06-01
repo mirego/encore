@@ -64,7 +64,7 @@ describe Encore::Serializer do
       end
     end
 
-    it { expect(serialized[:linked][:projects]).to eq([{ name: project1.name }, { name: project2.name }]) }
+    it { expect(serialized[:linked][:projects]).to eq([{ name: project1.name, links: {} }, { name: project2.name, links: {} }]) }
   end
 
   context 'with and no include' do
@@ -80,6 +80,6 @@ describe Encore::Serializer do
       end
     end
 
-    it { expect(serialized[:linked][:projects]).to eq([{ name: project1.name }, { name: project2.name }]) }
+    it { expect(serialized[:linked][:projects]).to eq([{ name: project1.name, links: {} }, { name: project2.name, links: {} }]) }
   end
 end
