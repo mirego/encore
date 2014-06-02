@@ -3,6 +3,8 @@ require 'encore/serializer/links_reflection_includer'
 module Encore
   module Serializer
     class Base < ::ActiveModel::Serializer
+      attributes :links
+
       def id
         object.id.to_s
       end

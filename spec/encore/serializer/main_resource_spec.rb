@@ -33,5 +33,5 @@ describe Encore::Serializer do
   end
 
   it { expect(serialized[:users].count).to eq(2) }
-  it { expect(serialized[:users]).to eq([{ name: 'Allan' }, { name: 'Doe' }]) }
+  it { expect(serialized[:users]).to eq([{ name: 'Allan', links: {} }, { name: 'Doe', links: {} }]) }
 end
