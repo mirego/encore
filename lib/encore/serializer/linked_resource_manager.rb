@@ -8,7 +8,6 @@ module Encore
       def self.add(linked_ids, object)
         included_models = linked_ids.keys.map { |key| key.downcase }
         included_models << object.klass.name.downcase
-        included_models << object.klass.name.downcase.pluralize
 
         linked_ids.reduce({}) do |memo, (model, ids)|
           klass = model.constantize

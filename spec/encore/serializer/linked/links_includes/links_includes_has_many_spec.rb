@@ -77,8 +77,8 @@ describe Encore::Serializer do
   end
 
   context 'already included resource' do
-    it { expect(serialized[:linked][:projects][0][:links][:users]).to eq([user1.id.to_s]) }
-    it { expect(serialized[:linked][:projects][1][:links][:users]).to eq([user2.id.to_s]) }
+    it { expect(serialized[:linked][:projects][0][:links][:users]).to eq({ href: '/users?project_id=1', type: 'users' }) }
+    it { expect(serialized[:linked][:projects][1][:links][:users]).to eq({ href: '/users?project_id=2', type: 'users' }) }
   end
 
   context 'not included resource' do
