@@ -22,9 +22,7 @@ describe Encore::Persister do
         :name
       end
 
-      def key_mappings
-        { snake_case_key: :name }
-      end
+      key_mappings snake_case_key: :name
     end
   end
 

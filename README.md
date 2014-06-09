@@ -45,9 +45,7 @@ class PostSerializer < Encore::Serializer::Base
   # By default, root_key will be the pluralized model
   # name. If you want to set a custom root_key, you can
   # do that:
-  def self.root_key
-    :blog_posts
-  end
+  root_key :blog_posts
 end
 ```
 
@@ -118,9 +116,7 @@ Since we don’t want all associations to be exposed, we also need to allow the 
 class PostSerializer < Encore::Serializer::Base
   # ...
 
-  def self.can_include
-    [:author, :comments]
-  end
+  can_include :author, :comments
 end
 ```
 
@@ -167,9 +163,7 @@ If you want the `comments` to **always** be included when you request a `post`, 
 class PostSerializer < Encore::Serializer::Base
   # ...
 
-  def self.always_include
-    [:comments]
-  end
+  always_include :comments
 end
 ```
 

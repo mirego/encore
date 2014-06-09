@@ -34,9 +34,7 @@ describe Encore::Serializer do
         spawn_serializer('UserSerializer') do
           attributes :name, :links
 
-          def can_include
-            %i(project)
-          end
+          can_include :project
         end
         spawn_model('Project') do
           has_many :users
@@ -64,9 +62,7 @@ describe Encore::Serializer do
         spawn_serializer('UserSerializer') do
           attributes :name, :links
 
-          def can_include
-            %i(project)
-          end
+          can_include :project
         end
         spawn_model('Project') do
           has_many :users
@@ -94,13 +90,9 @@ describe Encore::Serializer do
         spawn_serializer('UserSerializer') do
           attributes :name, :links
 
-          def can_include
-            %i(project)
-          end
+          can_include :project
 
-          def can_access
-            []
-          end
+          can_access []
         end
         spawn_model('Project') do
           has_many :users
@@ -128,13 +120,9 @@ describe Encore::Serializer do
         spawn_serializer('UserSerializer') do
           attributes :name, :links
 
-          def can_include
-            %i(project)
-          end
+          can_include :project
 
-          def can_access
-            []
-          end
+          can_access []
         end
         spawn_model('Project') do
           has_many :users
@@ -162,9 +150,7 @@ describe Encore::Serializer do
       spawn_serializer('UserSerializer') do
         attributes :name, :links
 
-        def can_include
-          %i(project)
-        end
+        can_include :project
       end
       spawn_model('Project') do
         has_many :users
@@ -208,9 +194,7 @@ describe Encore::Serializer do
       spawn_serializer('UserSerializer') do
         attributes :name, :links
 
-        def can_include
-          %i(projects)
-        end
+        can_include :projects
       end
       spawn_model('Project') do
         belongs_to :user
@@ -255,9 +239,7 @@ describe Encore::Serializer do
       spawn_serializer('UserSerializer') do
         attributes :name, :links
 
-        def can_include
-          %i(project)
-        end
+        can_include :project
       end
       spawn_model('Project')
       spawn_serializer('ProjectSerializer') do
