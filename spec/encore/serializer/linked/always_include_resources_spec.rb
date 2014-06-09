@@ -58,9 +58,7 @@ describe Encore::Serializer do
       spawn_serializer('UserSerializer') do
         attributes :name
 
-        def always_include
-          %i(project)
-        end
+        always_include :project
       end
     end
 
@@ -74,9 +72,7 @@ describe Encore::Serializer do
       spawn_serializer('UserSerializer') do
         attributes :name
 
-        def always_include
-          %i(project)
-        end
+        always_include :project
       end
     end
 

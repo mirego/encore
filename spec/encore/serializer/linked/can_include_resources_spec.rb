@@ -58,9 +58,7 @@ describe Encore::Serializer do
       spawn_serializer('UserSerializer') do
         attributes :name
 
-        def can_include
-          %i(project)
-        end
+        can_include :project
       end
     end
 

@@ -33,23 +33,17 @@ describe Encore::Serializer do
     spawn_serializer('ProjectSerializer') do
       attributes :name
 
-      def can_include
-        %i(organization user users)
-      end
+      can_include :organization, :user, :users
     end
     spawn_serializer('UserSerializer') do
       attributes :name
 
-      def can_include
-        %i(project)
-      end
+      can_include :project
     end
     spawn_serializer('OrganizationSerializer') do
       attributes :name
 
-      def can_include
-        %i(projects)
-      end
+      can_include :projects
     end
   end
 
