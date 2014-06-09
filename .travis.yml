@@ -8,7 +8,9 @@ gemfile:
   - gemfiles/Gemfile.activerecord-4.0
   - gemfiles/Gemfile.activerecord-4.1
 
-script: "echo 'DO IT' && bundle exec rake spec"
+script:
+  - 'echo "Checking code style" && bundle exec phare'
+  - 'echo "Running specs" && RAILS_ENV=test bundle exec rake spec'
 
 notifications:
   hipchat:
