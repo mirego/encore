@@ -17,7 +17,7 @@ module Encore
 
       module NotLoaded
         def self.reflection_has_many(object, reflection)
-          reflection_type = reflection.name.to_s.pluralize
+          reflection_type = plural_path(reflection.klass)
 
           {
             href: "/#{reflection_type}?#{object.class.name.underscore}_id=#{object.id}",
@@ -26,16 +26,17 @@ module Encore
         end
 
         def self.reflection_has_one(object, reflection)
-          reflection_type = reflection.name.to_s
+          root_type = plural_path(object.class)
+          reflection_type = singular_path(reflection.klass)
 
           {
-            href: "/#{object.class.name.underscore.pluralize}/#{object.id}/#{reflection_type}",
+            href: "/#{root_type}/#{object.id}/#{reflection_type}",
             type: reflection_type.pluralize
           }
         end
 
         def self.reflection_belongs_to(object, reflection)
-          reflection_type = reflection.name.to_s.pluralize
+          reflection_type = plural_path(reflection.klass)
           reflection_id = object.send(reflection.foreign_key).try(:to_s)
 
           return nil if reflection_id.blank?
@@ -45,6 +46,16 @@ module Encore
             id: reflection_id,
             type: reflection_type
           }
+        end
+
+      private
+
+        def self.plural_path(klass)
+          klass.active_model_serializer.root_key.to_s
+        end
+
+        def self.singular_path(klass)
+          plural_path(klass).singularize
         end
       end
     end
