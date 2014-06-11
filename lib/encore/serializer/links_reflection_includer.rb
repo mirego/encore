@@ -20,7 +20,7 @@ module Encore
           reflection_type = reflection.name.to_s.pluralize
 
           {
-            href: "/#{reflection_type}?#{object.class.name.downcase}_id=#{object.id}",
+            href: "/#{reflection_type}?#{object.class.name.underscore}_id=#{object.id}",
             type: reflection_type
           }
         end
@@ -29,7 +29,7 @@ module Encore
           reflection_type = reflection.name.to_s
 
           {
-            href: "/#{object.class.name.downcase.pluralize}/#{object.id}/#{reflection_type}",
+            href: "/#{object.class.name.underscore.pluralize}/#{object.id}/#{reflection_type}",
             type: reflection_type.pluralize
           }
         end
