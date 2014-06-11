@@ -38,6 +38,8 @@ module Encore
           reflection_type = reflection.name.to_s.pluralize
           reflection_id = object.send(reflection.foreign_key).try(:to_s)
 
+          return nil if reflection_id.blank?
+
           {
             href: "/#{reflection_type}/#{reflection_id}",
             id: reflection_id,

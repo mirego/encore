@@ -168,6 +168,7 @@ describe Encore::Serializer do
     let(:create_records!) do
       User.create name: 'Allan', project_id: 1
       User.create name: 'Doe', project_id: 2
+      User.create name: 'Bar', project_id: nil
     end
 
     context 'not included' do
@@ -181,6 +182,15 @@ describe Encore::Serializer do
       end
 
       it { expect(serialized[:users][0][:links][:project]).to eq(expected_project) }
+    end
+
+    context 'empty association' do
+      let(:include) { '' }
+      let(:expected_project) do
+        nil
+      end
+
+      it { expect(serialized[:users][2][:links][:project]).to eq(expected_project) }
     end
 
     context 'included' do
