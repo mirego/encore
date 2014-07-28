@@ -10,7 +10,8 @@ module Encore
       end
 
       def links
-        object.reflections.each_with_object({}) do |(_, reflection), memo|
+        reflections = object.try(:_reflections) || object.reflections
+        reflections.each_with_object({}) do |(_, reflection), memo|
           if object.association(reflection.name).loaded?
             fetcher = LinksReflectionIncluder::Loaded
           else

@@ -34,7 +34,9 @@ module Encore
     private
 
       def reflections
-        @reflections ||= @collection.klass.reflections
+        @reflections ||= begin
+          @collection.klass.try(:_reflections) || @collection.klass.reflections
+        end
       end
 
       def serializer

@@ -7,7 +7,8 @@ module Encore
         links = args.delete(:links) || []
 
         links.each do |link, value|
-          reflection = @model.reflections[link.to_sym]
+          reflections = @model.try(:_reflections) || @model.reflections
+          reflection = reflections[link.to_sym]
           key = fetch_key(reflection)
           value = fetch_value(value, reflection)
 
