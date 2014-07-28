@@ -14,7 +14,8 @@ module Encore
           serializer = Utils.fetch_serializer(klass)
 
           collection = klass.where(id: ids.to_a)
-          available_includes = klass.reflections.map do |key, _|
+          reflections = klass.try(:_reflections) || klass.reflections
+          available_includes = reflections.map do |key, _|
             next unless included_models.include?(key.to_s)
             key
           end.compact
