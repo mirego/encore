@@ -44,8 +44,8 @@ describe Encore::Serializer do
     spawn_serializer('ProjectSerializer') do
       attributes :name
     end
-
   end
+
   let(:create_records!) do
     User.create name: 'Allan', project_id: 1
     User.create name: 'Doe', project_id: 2

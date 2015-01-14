@@ -46,7 +46,6 @@ describe Encore::Serializer do
       spawn_serializer('ProjectSerializer') do
         attributes :name
       end
-
     end
     let(:create_records!) do
       User.create name: 'Allan', project_id: 1
@@ -74,12 +73,13 @@ describe Encore::Serializer do
       spawn_serializer('ProjectSerializer') do
         attributes :name
       end
-
     end
+
     let(:create_records!) do
       User.create name: 'Allan', project_id: 1
       User.create name: 'Doe', project_id: 2
     end
+
     let(:include) { '' }
 
     it { expect(serialized[:users][0][:links][:project].present?).to eq(true) }
@@ -104,12 +104,13 @@ describe Encore::Serializer do
       spawn_serializer('ProjectSerializer') do
         attributes :name
       end
-
     end
+
     let(:create_records!) do
       User.create name: 'Allan', project_id: 1
       User.create name: 'Doe', project_id: 2
     end
+
     let(:include) { '' }
 
     it { expect(serialized[:users][0][:links][:project].present?).to eq(false) }
@@ -134,12 +135,13 @@ describe Encore::Serializer do
       spawn_serializer('ProjectSerializer') do
         attributes :name
       end
-
     end
+
     let(:create_records!) do
       User.create name: 'Allan', project_id: 1
       User.create name: 'Doe', project_id: 2
     end
+
     let(:include) { 'project' }
 
     it { expect(serialized[:users][0][:links][:project].present?).to eq(true) }
