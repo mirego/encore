@@ -19,7 +19,7 @@ module Encore
     private
 
       def self.association_collection(item, inclusion, reflections)
-        reflection = reflections[inclusion]
+        reflection = reflections[inclusion.to_s] || reflections[inclusion.to_sym]
         class_name = fetch_class_name(item, reflection)
 
         collection = begin
