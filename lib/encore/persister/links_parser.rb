@@ -8,7 +8,7 @@ module Encore
 
         links.each do |link, value|
           reflections = @model.try(:_reflections) || @model.reflections
-          reflection = reflections[link.to_sym]
+          reflection = reflections[link.to_s] || reflections[link.to_sym]
           key = fetch_key(reflection)
           value = fetch_value(value, reflection)
 
