@@ -21,7 +21,7 @@ module Encore
 
       def persist!
         @model.transaction do
-          procces_payload!(action)
+          procces_payload!
 
           if @errors.any? || @ids.empty?
             raise ActiveRecord::Rollback
@@ -37,27 +37,25 @@ module Encore
 
     private
 
-      def procces_payload!(action)
+      def procces_payload!
         payload = key_mapping(@payload)
         payload = param_injection(payload)
 
         payload.each_with_index do |args, i|
           args = parse_links(args)
-          record = send("#{action}_record", args)
+          record = send(action, args)
 
-          next unless record.present?
-
-          @ids += fetch_id(record)
+          @ids += [record.id]
           @errors += parse_errors(record, i)
         end
       end
 
-      def active_record_class
-        @model.is_a?(Class) ? @model : @model.class
+      def action
+        @model.is_a?(Class) ? 'create_record' : 'update_record'
       end
 
-      def action
-        @model.is_a?(Class) ? :create : :update
+      def active_record_class
+        action == 'create_record' ? @model : @model.class
       end
 
       def create_record(args)
@@ -67,10 +65,6 @@ module Encore
       def update_record(args)
         @model.update_attributes(args)
         @model
-      end
-
-      def fetch_id(record)
-        [record.id]
       end
 
       def key_mapping(payload)
