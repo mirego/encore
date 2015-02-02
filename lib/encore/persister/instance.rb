@@ -14,6 +14,7 @@ module Encore
       def initialize(model, payload, options = {})
         @model = model
         @payload = payload
+        @payload = [@payload] unless payload.is_a?(Array)
         @options = options
         @errors = []
         @ids = Set.new

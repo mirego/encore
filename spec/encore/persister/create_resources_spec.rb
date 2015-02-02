@@ -25,16 +25,33 @@ describe Encore::Persister do
   end
 
   context 'single create' do
-    let(:params) do
-      [{
-        name: 'Allan',
-        phone: '555-2525'
-      }]
+    shared_examples_for 'valid persister' do
+      it { expect { persist! }.to change { model.count }.by(1) }
+      it { expect { persist! }.to change { model.first.try(:name) }.to('Allan') }
+      it { expect { persist! }.to change { model.first.try(:phone) }.to('555-2525') }
     end
 
-    it { expect { persist! }.to change { model.count }.by(1) }
-    it { expect { persist! }.to change { model.first.try(:name) }.to('Allan') }
-    it { expect { persist! }.to change { model.first.try(:phone) }.to('555-2525') }
+    context 'array params' do
+      let(:params) do
+        [{
+          name: 'Allan',
+          phone: '555-2525'
+        }]
+      end
+
+      it_behaves_like 'valid persister'
+    end
+
+    context 'object params' do
+      let(:params) do
+        {
+          name: 'Allan',
+          phone: '555-2525'
+        }
+      end
+
+      it_behaves_like 'valid persister'
+    end
   end
 
   context 'many create' do

@@ -18,20 +18,39 @@ describe Encore::Persister do
   end
 
   let(:model) { User.create name: 'Bob' }
-  let(:params) do
-    [{
-      id: model.id,
-      name: 'Allan',
-      phone: '555-2525'
-    }]
-  end
 
   before do
     run_migrations!
     spawn_models!
   end
 
-  it { expect { persist! }.to_not change { model.class.count } }
-  it { expect { persist! }.to change { model.class.first.name }.to('Allan') }
-  it { expect { persist! }.to change { model.class.first.phone }.to('555-2525') }
+  shared_examples_for 'valid persister' do
+    it { expect { persist! }.to_not change { model.class.count } }
+    it { expect { persist! }.to change { model.class.first.name }.to('Allan') }
+    it { expect { persist! }.to change { model.class.first.phone }.to('555-2525') }
+  end
+
+  context 'array params' do
+    let(:params) do
+      [{
+        id: model.id,
+        name: 'Allan',
+        phone: '555-2525'
+      }]
+    end
+
+    it_behaves_like 'valid persister'
+  end
+
+  context 'object params' do
+    let(:params) do
+      {
+        id: model.id,
+        name: 'Allan',
+        phone: '555-2525'
+      }
+    end
+
+    it_behaves_like 'valid persister'
+  end
 end
