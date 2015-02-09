@@ -22,7 +22,7 @@ module Encore
 
       def persist!
         @model.transaction do
-          procces_payload!
+          process_payload!
 
           if @errors.any? || @ids.empty?
             raise ActiveRecord::Rollback
@@ -38,7 +38,7 @@ module Encore
 
     private
 
-      def procces_payload!
+      def process_payload!
         payload = key_mapping(@payload)
         payload = param_injection(payload)
 
