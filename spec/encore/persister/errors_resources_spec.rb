@@ -29,27 +29,30 @@ describe Encore::Persister do
     }]
   end
 
-  let(:expected_error) do
-    {
-      field: 'name',
-      types: ['can\'t be blank', 'is too short (minimum is 2 characters)'],
-      path: 'user/0/name'
-    }
+  let(:expected_errors) do
+    [
+      {
+        path: 'user/0/name',
+        title: 'can\'t be blank'
+      },
+      {
+        path: 'user/0/name',
+        title: 'is too short (minimum is 2 characters)'
+      }
+    ]
   end
 
   context 'create' do
     let(:model) { User }
 
     it { expect { persist! }.to_not change { model.count } }
-    it { expect { persist! }.to change { persister.errors.count }.to(1) }
-    it { expect { persist! }.to change { persister.errors.first }.to(expected_error) }
+    it { expect { persist! }.to change { persister.errors }.to(expected_errors) }
   end
 
   context 'update' do
     let(:model) { User.create name: 'Robert' }
 
     it { expect { persist! }.to_not change { model.reload.name } }
-    it { expect { persist! }.to change { persister.errors.count }.to(1) }
-    it { expect { persist! }.to change { persister.errors.first }.to(expected_error) }
+    it { expect { persist! }.to change { persister.errors }.to(expected_errors) }
   end
 end
