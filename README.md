@@ -10,6 +10,10 @@
   <a href="https://codeclimate.com/github/mirego/encore"><img src="http://img.shields.io/codeclimate/github/mirego/encore.svg" /></a>
 </p>
 
+## Deprecation notice
+
+:warning: This repository is now deprecated in favor of [`jsonapi-resources`](https://github.com/cerebris/jsonapi-resources) which supports the latest JSON API spec.
+
 ## Installation
 
 Add this line to your application’s Gemfile:
